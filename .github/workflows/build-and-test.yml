@@ -136,9 +136,8 @@ jobs:
       working-directory: ./build
       shell: pwsh
 
-    - name: Codecov
-      if: ${{ 'push' != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
-      uses: codecov/codecov-action@v7
-      with:
-        use_oidc: true
-        fail_ci_if_error: true
+    # racecar: Codecov upload removed. It is a tokenless OIDC upload against
+    # abpframework/abp; from this fork Codecov answers
+    # `Upload queued for processing failed: {"message":"Repository not found"}`
+    # and fail_ci_if_error: true turns that into a job failure. Build All and
+    # Test All above are unchanged and still produce the coverage files.
